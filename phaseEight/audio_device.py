@@ -202,7 +202,7 @@ def resolve_device(spec: str, kind: str) -> tuple:
     Resolves a configured device spec to (index, name).
 
     `spec` is either a device index ("9") or a case-insensitive name
-    fragment ("realtek"). Returns (None, reason) if it cannot be
+    fragment ("onboard"). Returns (None, reason) if it cannot be
     resolved -- including when it is AMBIGUOUS, which is refused rather
     than guessed: silently picking one of two microphones is exactly
     how you end up debugging "Jarvis stopped hearing me" again.

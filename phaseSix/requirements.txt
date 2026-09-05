@@ -1,0 +1,16 @@
+# os_agent.py reuses Phase 4's llm_client.py, so this needs the same
+# OpenAI-compatible SDK (pointed at DeepSeek) that Phase 4 uses.
+openai
+python-dotenv
+pytest
+
+# read_screen (OCR) support. Pillow does the screenshot capture --
+# needs 9.3+ specifically for the all_screens (multi-monitor) option;
+# pytesseract is a Python wrapper around the separate Tesseract OCR
+# engine, which is NOT installed by pip — see README.md for the
+# platform-specific install step.
+Pillow>=9.3
+pytesseract
+
+# Mouse/keyboard automation (move_mouse, type_text, click, press_hotkey).
+pyautogui

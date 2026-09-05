@@ -1,0 +1,10 @@
+sounddevice
+numpy
+openai-whisper
+pyttsx3
+python-dotenv
+pytest
+
+# openai-whisper depends on PyTorch. Default `pip install` pulls CPU-only
+# torch. For GPU-accelerated transcription on your RTX 3060, install torch
+# with CUDA support FIRST (see README), then install this file.

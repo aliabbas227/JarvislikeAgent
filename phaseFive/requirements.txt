@@ -1,0 +1,7 @@
+chromadb
+python-dotenv
+pytest
+
+# memory_chat.py imports phaseOne/jarvis.py directly (same pattern as
+# Phase 2's voice_chat.py), which needs these:
+requests

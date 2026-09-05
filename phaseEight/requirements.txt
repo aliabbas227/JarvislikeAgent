@@ -1,0 +1,54 @@
+# Phase 8 -- polish on top of Phase 7's orchestrator.
+#
+# Phase 8 imports phaseSeven/orchestrator.py directly (same cross-phase
+# pattern Phase 7 uses to reach into Phases 1-6), which transitively
+# imports Phases 1-6's own modules -- so this venv needs everything
+# Phase 7's venv needed. Everything below through `pyautogui` is
+# inherited from phaseSeven/requirements.txt verbatim, for that reason
+# and no other.
+
+python-dotenv
+requests            # Phase 1 (Ollama backend) + Phase 4 (search_web tool)
+sounddevice
+soundfile
+numpy
+openai-whisper      # Phase 2 STT
+pyttsx3             # Phase 2 TTS
+openwakeword        # Phase 3 wake word
+onnxruntime         # openWakeWord's inference backend
+openai              # Phase 4 -- DeepSeek client (OpenAI-compatible SDK)
+chromadb            # Phase 5 -- persistent memory store
+Pillow>=9.3         # Phase 6 -- read_screen capture (9.3+ for all_screens)
+pytesseract         # Phase 6 -- read_screen OCR (needs the Tesseract binary too, see phaseSix/README.md)
+pyautogui           # Phase 6 -- move_mouse/type_text/click/press_hotkey
+
+# Phase 8 milestone 1 adds no new packages: get_current_time is stdlib
+# only, and the real get_weather uses Open-Meteo over plain `requests`
+# (already listed above) with no API key or SDK of its own.
+
+# Phase 8 milestone 2 -- tool expansion. Windows/power control needs
+# nothing new: it uses ctypes against user32 directly rather than
+# pywin32, matching the choice Phase 6 already made for
+# get_active_window. pyperclip is already present as a pyautogui
+# dependency but is listed explicitly, since os_tools.py imports it by
+# name and shouldn't depend on another package continuing to pull it in.
+psutil              # list_processes / kill_process / get_system_status
+pyperclip           # get_clipboard / set_clipboard
+pypdf               # read_document, .pdf
+python-docx         # read_document, .docx
+
+# Phase 8 milestone 4 -- the Jarvis voice. edge-tts is Microsoft's
+# neural TTS: free, no API key, no account. soundfile decodes what it
+# returns and sounddevice plays it -- both already present above.
+# Falls back to Phase 2's pyttsx3 whenever it is unavailable, so this
+# is not a hard dependency.
+edge-tts
+
+# Phase 8 milestone 5 -- seeing the screen. uiautomation reads Windows'
+# accessibility tree, which is what makes clicking land on the control
+# it aimed at rather than at estimated pixels. The vision half needs no
+# pip package: it talks to a local Ollama over plain requests.
+# Requires a vision model pulled once:  ollama pull qwen2.5vl:7b
+uiautomation
+
+pytest

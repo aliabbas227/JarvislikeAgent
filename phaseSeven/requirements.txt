@@ -1,0 +1,25 @@
+# Phase 7 -- wake word + voice + LLM (+ tools + memory + OS control)
+# orchestration. Milestone 1 needed nothing beyond Phases 1-3;
+# milestone 2 added openai (Phase 4's DeepSeek client) and requests
+# (also used by Phase 4's search_web tool, already listed below for
+# Phase 1); milestone 3 added chromadb (Phase 5's persistent memory
+# store); milestone 4 adds Pillow/pytesseract/pyautogui (Phase 6's
+# OS-control tools).
+
+python-dotenv
+requests            # Phase 1 (Ollama backend) + Phase 4 (search_web tool)
+# anthropic         # uncomment if LLM_BACKEND=anthropic (unused once milestone 2 lands -- see README)
+sounddevice
+soundfile
+numpy
+openai-whisper      # Phase 2 STT
+pyttsx3             # Phase 2 TTS
+openwakeword         # Phase 3 wake word
+onnxruntime         # openWakeWord's inference backend
+openai              # Phase 4 (milestone 2) -- DeepSeek client (OpenAI-compatible SDK)
+chromadb            # Phase 5 (milestone 3) -- persistent memory store
+Pillow>=9.3          # Phase 6 (milestone 4) -- read_screen capture (9.3+ for all_screens)
+pytesseract          # Phase 6 (milestone 4) -- read_screen OCR (needs the Tesseract binary too, see phaseSix/README.md)
+pyautogui            # Phase 6 (milestone 4) -- move_mouse/type_text/click/press_hotkey
+
+pytest

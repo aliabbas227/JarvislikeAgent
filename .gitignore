@@ -1,0 +1,102 @@
+# ---------------------------------------------------------------------
+# Secrets. Never commit these.
+#
+# phaseFour/.env, phaseSix/.env and phaseSeven/.env hold real
+# DEEPSEEK_API_KEY / TAVILY_API_KEY values and CONFIRM_PASSWORD -- the
+# password that gates every destructive action (deleting files, killing
+# processes, power actions). Committing that one would not just leak a
+# credential, it would defeat the confirmation gate the whole design
+# rests on.
+#
+# The .env.example files ARE committed on purpose: they document every
+# knob without carrying a value.
+# ---------------------------------------------------------------------
+.env
+*.env
+!.env.example
+!*.env.example
+
+# ---------------------------------------------------------------------
+# Per-phase virtual environments.
+#
+# Each phase has its own venv by design (see CLAUDE.md). They are large,
+# machine-specific, and rebuildable from requirements.txt.
+# ---------------------------------------------------------------------
+venv/
+.venv/
+env/
+ENV/
+
+# ---------------------------------------------------------------------
+# Personal data.
+#
+# chroma_store/ is the persistent memory from Phase 5 -- the actual
+# facts spoken to Jarvis. Personal by definition, and not useful to
+# anyone else.
+# ---------------------------------------------------------------------
+chroma_store/
+*/chroma_store/
+
+# ---------------------------------------------------------------------
+# Downloaded model weights.
+#
+# openWakeWord ships its weights separately (download_models()), Whisper
+# fetches its own on first use, and Piper voices are ~60MB each. All are
+# reproducible; none belong in git.
+# ---------------------------------------------------------------------
+*.onnx
+*.tflite
+*.pt
+*.bin
+*.gguf
+models/
+piper/
+
+# ---------------------------------------------------------------------
+# Audio and screen capture artifacts.
+#
+# Recorded turns, TTS renders and screenshots are transient. Some are
+# also recordings of a real person's voice or the contents of their
+# screen, which is a second reason not to publish them.
+# ---------------------------------------------------------------------
+*.wav
+*.mp3
+*.webm
+*.png
+*.jpg
+*.jpeg
+!docs/**/*.png
+
+# ---------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.coverage
+htmlcov/
+
+# ---------------------------------------------------------------------
+# Editors and OS
+# ---------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ---------------------------------------------------------------------
+# Logs and scratch
+# ---------------------------------------------------------------------
+*.log
+tmp/
+temp/
+scratch/
